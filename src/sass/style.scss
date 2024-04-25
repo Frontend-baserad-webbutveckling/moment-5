@@ -1,0 +1,229 @@
+@import url('https://fonts.cdnfonts.com/css/aileron');
+@import './abstracts/variables';
+@import './abstracts/mixins';
+@import './base/resets';
+@import './abstracts/functions';
+@import './themes/theme';
+
+
+
+/* Grundläggande */
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    margin: 0;
+    padding: 20px;
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center
+    }
+}
+
+/* Huvudmeny */
+header {
+    @include gradient(#007bff);
+
+    background-color: $sekundär-färg;
+    border-radius: $border-radius;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.navbar {
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 60px;
+}
+
+.site_name {
+    font-size: 2em;
+    padding-right: 70px;
+}
+
+.nav-link {
+    transition: 0.7s ease;
+
+}
+
+.nav-link:hover {
+    color: $accent-färg;
+}
+
+/* HAMBURGERMENU START */
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: rgb(255, 255, 255);
+        z-index: -1;
+    }
+}
+
+
+
+
+/* Sektioner */
+section {
+    padding: 40px 20px;
+    max-width: 65ch;
+
+    h1 {
+        font-family: 'Aileron', sans-serif;
+        margin-bottom: 20px;
+        font-family: Aileron, sans-serif;
+        font-size: 2em;
+        font-weight: 400;
+        padding: 10px;
+        text-align: center;
+        @include färg-pulsering-animation;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    img {
+        width: 80%;
+        margin: 20px auto;
+        display: flex;
+    }
+
+}
+
+.sass,
+.images {
+    @extend section;
+
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    @include responsive-small(768px);
+}
+
+@media (min-width: 1200px) {
+    @include responsive-large(1200px);
+}
+
+// Aimationer
+
+.movingImg {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    animation: 6s cubic-bezier(.65, .05, .36, 1) infinite rörligAnimation;
+}
+
+@keyframes rörligAnimation {
+    0% {
+        left: 0;
+        transform: rotateY(0deg)
+    }
+
+    25% {
+        left: 40%;
+    }
+
+    50% {
+        left: 60%;
+        transform: rotateY(180deg)
+    }
+
+    75% {
+        left: 80%;
+    }
+
+    100% {
+        left: 100%;
+        
+    }
+}
+
+.aniButton {
+    background-color: $buttonColor;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    border-radius: 10px;
+  transition: all $hoverTransitionTime ease;
+}
+  .aniButton.clicked {
+    background-color: darken($buttonColor, 20%);
+    transform: scale(2.1);
+}
+
+.aniButton.clicked:before {
+    content: "";
+    background: linear-gradient(90deg,
+            #ff0000,
+            #ff7300,
+            #fffb00,
+            #48ff00,
+            #00ffd5,
+            #002bff,
+            #7a00ff,
+            #ff00c8,
+            #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+
+    filter: blur(8px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button 20s linear infinite;
+    border-radius: 10px;
+}
+
+@keyframes glowing-button {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}

@@ -1,0 +1,20 @@
+@mixin färg-pulsering-animation($duration: 10s, $timing-function: ease-in-out, $iteration-count: infinite) {
+    @keyframes pulserings-färger {
+       0% {
+         color: #e21d83;
+       }
+       25% {
+         color: #E2DE1D;
+       }
+       50% {
+         color: #1de27c;
+       }
+       100% {
+         color: #1D21E2;
+       }
+    }
+   
+    animation:pulserings-färger $duration $timing-function $iteration-count;
+   }
+
+   
