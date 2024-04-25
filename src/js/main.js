@@ -7,12 +7,13 @@ hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("active");
 });
 
-document.querySelectorAll(".nav-link").forEach( n => n.addEventListener("click", () => {
+document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
 }))
 
 // Klick för aktivering av knapp-animering
-document.querySelector('.aniButton').addEventListener('click', function() {
+document.querySelector('.aniButton').addEventListener('click', function () {
     this.classList.toggle('clicked');
 });
+
