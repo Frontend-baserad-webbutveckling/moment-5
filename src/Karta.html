@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karta</title>
     <link rel="stylesheet" href="sass/style.scss">
+    <style>
+        #map {
+            width: 500px;
+            height: 300px;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,6 +45,27 @@
         </nav>
     </header>
     <main>
+        <input type="text" id="plats" placeholder="Skriv in en plats">
+        <button onclick="visaKarta()">Visa karta</button>
+        <div id="karta"></div>
+    
+        <script>
+          function visaKarta() {
+    var plats = document.getElementById('plats').value;
+    var url = `https://nominatim.openstreetmap.org/search?q=${plats}&format=json`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var lat = data[0].lat;
+            var lon = data[0].lon;
+            var kartaUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.005},${lat-0.005},${lon+0.005},${lat+0.005}&layer=mapnik&marker=${lat},${lon}`;
+            document.getElementById('karta').innerHTML = `<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="${kartaUrl}" style="border: 1px solid black"></iframe>`;
+        })
+        .catch(error => console.error('Error:', error));
+        
+}
+        </script>
 
     </main>
 
