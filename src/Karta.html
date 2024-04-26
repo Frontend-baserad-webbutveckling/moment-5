@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karta</title>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="sass/style.scss">
     <style>
         #map {
@@ -45,31 +47,19 @@
         </nav>
     </header>
     <main>
-        <input type="text" id="plats" placeholder="Skriv in en plats">
-        <button onclick="visaKarta()">Visa karta</button>
-        <div id="karta"></div>
+        <input type="text" id="plats" placeholder="Skriv in en plats" >
+
+        <div id="map"></div>
+
+
     
-        <script>
-          function visaKarta() {
-    var plats = document.getElementById('plats').value;
-    var url = `https://nominatim.openstreetmap.org/search?q=${plats}&format=json`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var lat = data[0].lat;
-            var lon = data[0].lon;
-            var kartaUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.005},${lat-0.005},${lon+0.005},${lat+0.005}&layer=mapnik&marker=${lat},${lon}`;
-            document.getElementById('karta').innerHTML = `<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="${kartaUrl}" style="border: 1px solid black"></iframe>`;
-        })
-        .catch(error => console.error('Error:', error));
-        
-}
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNUyDWWynesGdaTYrU1mpne12ozo7mvs4&callback=initMap">
         </script>
-
     </main>
 
 </body>
+
+<script src="js/karta.js" type="module"></script>
 <script src="js/main.js" type="module"></script>
 
 </html>

@@ -50,3 +50,31 @@ function createBarChart(data) {
   });
 }
 
+function createPieChart(data) {
+  // Sortera data
+  const programs = data
+  .filter(item => item.type === 'Program')
+  .sort((a, b) => b.applicantsTotal - a.applicantsTotal);
+  const programLabels = programs.slice(0, 5).map(program => program.name);
+  const programValues = programs.slice(0, 5).map(program => program.applicantsTotal);
+  const chartContainer = document.getElementById('pie-chart-container');
+ new Chart(chartContainer, {
+    type: 'pie',
+    data: {
+      labels: programLabels,
+      datasets: [
+        {
+          data: programValues,
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#99FF99'],
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      title: {
+        display: true,
+        text: 'De 5 mest säkta programmen på Mittuniversitetet, HT23'
+      }
+    }
+  });
+}
